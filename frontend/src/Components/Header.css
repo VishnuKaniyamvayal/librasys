@@ -13,9 +13,14 @@
     top: 0%;
 }
 
+a{
+    color:white;
+    cursor: pointer;
+}
+
 .logo-nav a{
     font-size: 20px;
-    color: rgb(233,83,75);
+    color: rgb(255, 255, 255);
     font-weight: 800;
 }
 
@@ -59,7 +64,7 @@
 }
 
 .option a{
-    color: rgb(233,83,75);
+    color: rgb(255, 255, 255);
     display: flex;
     align-items: center;
     font-weight: 800;

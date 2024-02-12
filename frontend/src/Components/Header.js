@@ -1,13 +1,19 @@
-import { React, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { React, useContext, useState } from 'react'
+import { Link , useHistory } from 'react-router-dom'
 import './Header.css'
-
 import MenuIcon from '@material-ui/icons/Menu';
 import ClearIcon from '@material-ui/icons/Clear';
+import { AuthContext } from '../Context/AuthContext';
 
 function Header() {
 
+    const { user } = useContext(AuthContext)
+
+    const navigate = useHistory();
+
     const [menutoggle, setMenutoggle] = useState(false)
+
+    const { dispatch } = useContext(AuthContext)
 
     const Toggle = () => {
         setMenutoggle(!menutoggle)
@@ -21,7 +27,7 @@ function Header() {
         <div className="header">
             <div className="logo-nav">
             <Link to='/'>
-                <a href="#home">LIBRARY</a>
+                <a href="#home">Librasys</a>
             </Link>
             </div>
             <div className='nav-right'>
@@ -37,11 +43,17 @@ function Header() {
                         <a href="#books">Books</a>
                         </Link>
                     </li>
-                    <li className="option" onClick={() => { closeMenu() }}>
+                    {  !user ? <li className="option" onClick={() => { closeMenu() }}>
                         <Link to='/signin'>
                         <a href='signin'>SignIn</a>
                         </Link>
-                    </li>
+                    </li> 
+                    :
+                    <li className="option" onClick={() => { closeMenu() }}>
+                        <a onClick={()=> { dispatch({type: "LOGOUT"}); navigate.push("/")}} >SignOut</a>
+                    </li> 
+                    }
+                    
                 </ul>
             </div>
 

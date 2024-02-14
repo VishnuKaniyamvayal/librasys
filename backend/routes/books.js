@@ -46,6 +46,7 @@ router.post("/addbook", async (req, res) => {
                 bookName: req.body.bookName,
                 alternateTitle: req.body.alternateTitle,
                 author: req.body.author,
+                bookCover:req.body.bookCover,
                 bookCountAvailable: req.body.bookCountAvailable,
                 language: req.body.language,
                 publisher: req.body.publisher,

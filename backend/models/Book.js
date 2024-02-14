@@ -5,6 +5,9 @@ const BookSchema = new mongoose.Schema({
         type:String,
         require:true
     },
+    bookCover:{
+        type:String,
+    },
     alternateTitle:{
         type:String,
         default:""

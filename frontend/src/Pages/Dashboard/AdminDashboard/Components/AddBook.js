@@ -12,6 +12,7 @@ function AddBook() {
 
     const [bookName, setBookName] = useState("")
     const [alternateTitle, setAlternateTitle] = useState("")
+    const [bookCover, setbookCover] = useState("")
     const [author, setAuthor] = useState("")
     const [bookCountAvailable, setBookCountAvailable] = useState(null)
     const [language, setLanguage] = useState("")
@@ -44,6 +45,7 @@ function AddBook() {
         setIsLoading(true)
         const BookData = {
             bookName: bookName,
+            bookCover: bookCover,
             alternateTitle: alternateTitle,
             author: author,
             bookCountAvailable: bookCountAvailable,
@@ -91,6 +93,9 @@ function AddBook() {
 
                 <label className="addbook-form-label" htmlFor="bookName">Book Name<span className="required-field">*</span></label><br />
                 <input className="addbook-form-input" type="text" name="bookName" value={bookName} onChange={(e) => { setBookName(e.target.value) }} required></input><br />
+                
+                <label className="addbook-form-label" htmlFor="bookCover">Book Cover Link<span className="required-field">*</span></label><br />
+                <input className="addbook-form-input" type="text" name="bookCover" value={bookCover} onChange={(e) => { setbookCover(e.target.value) }} required></input><br />
 
                 <label className="addbook-form-label" htmlFor="alternateTitle">AlternateTitle</label><br />
                 <input className="addbook-form-input" type="text" name="alternateTitle" value={alternateTitle} onChange={(e) => { setAlternateTitle(e.target.value) }}></input><br />

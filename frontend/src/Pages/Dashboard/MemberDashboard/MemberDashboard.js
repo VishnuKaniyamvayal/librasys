@@ -111,18 +111,6 @@ function MemberDashboard() {
           >
             <HistoryIcon className="dashboard-option-icon" /> History
           </a>
-          <a
-            href="#profile@member"
-            className={`dashboard-option ${
-              active === "logout" ? "clicked" : ""
-            }`}
-            onClick={() => {
-              logout();
-              setSidebar(false);
-            }}
-          >
-            <PowerSettingsNewIcon className="dashboard-option-icon" /> Log out{" "}
-          </a>
         </div>
 
         <div className="dashboard-option-content">

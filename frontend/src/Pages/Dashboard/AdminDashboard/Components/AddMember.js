@@ -18,8 +18,10 @@ function AddMember() {
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     const [mobileNumber, setMobileNumber] = useState(null)
+    const [photoUrl, setphotoUrl] = useState(null)
     const [recentAddedMembers, setRecentAddedMembers] = useState([])
     const [userType, setUserType] = useState(null)
+    const [isAdmin, setIsAdmin] = useState(false)
     const [gender, setGender] = useState(null)
     const [age, setAge] = useState(null)
     const [dob, setDob] = useState(null)
@@ -36,6 +38,11 @@ function AddMember() {
         { value: 'Student', text: 'Student' }
     ]
 
+    const isAdminobj = [
+        { value: true, text: "Yes" },
+        { value: false, text: 'No' }
+    ]
+
     //Add a Member
     const addMember = async (e) => {
         e.preventDefault()
@@ -45,12 +52,14 @@ function AddMember() {
                 userType: userType,
                 userFullName: userFullName,
                 admissionId: admissionId,
+                isAdmin:isAdmin,
                 employeeId: employeeId,
                 age: age,
                 dob: dobString,
                 gender: gender,
                 address: address,
                 mobileNumber: mobileNumber,
+                photo: photoUrl,
                 email: email,
                 password: password
             }
@@ -62,6 +71,7 @@ function AddMember() {
                 setRecentAddedMembers([response.data, ...recentAddedMembers])
                 setUserFullName(null)
                 setUserType("Student")
+                setIsAdmin(false)
                 setAdmissionId(null)
                 setEmployeeId(null)
                 setAddress(null)
@@ -113,6 +123,15 @@ function AddMember() {
                         onChange={(event, data) => setUserType(data.value)}
                     />
                 </div>
+                <div className='semanticdropdown' style={{marginTop:"10px"}}>
+                    <Dropdown
+                        placeholder='Is Admin User'
+                        fluid
+                        selection
+                        options={isAdminobj}
+                        onChange={(event, data) => setIsAdmin(data.value)}
+                    />
+                </div>
                 <label className="addmember-form-label" htmlFor="userFullName">Full Name<span className="required-field">*</span></label><br />
                 <input className="addmember-form-input" type="text" name="userFullName" value={userFullName} required onChange={(e) => setUserFullName(e.target.value)}></input><br />
 
@@ -121,6 +140,9 @@ function AddMember() {
 
                 <label className="addmember-form-label" htmlFor="mobileNumber">Mobile Number<span className="required-field">*</span></label><br />
                 <input className="addmember-form-input" type="text" value={mobileNumber} required onChange={(e) => setMobileNumber(e.target.value)}></input><br />
+                
+                <label className="addmember-form-label" htmlFor="photoUrl">Photo Url<span className="required-field">*</span></label><br />
+                <input className="addmember-form-input" type="text" value={photoUrl} required onChange={(e) => setMobileNumber(e.target.value)}></input><br />
 
                 <label className="addmember-form-label" htmlFor="gender">Gender<span className="required-field">*</span></label><br />
                 <div className='semanticdropdown'>

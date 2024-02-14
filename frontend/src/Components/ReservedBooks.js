@@ -1,7 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './ReservedBooks.css'
+import axios from 'axios';
 
 function ReservedBooks() {
+
+    const [books , setBooks]  = useState([]);
+
+    const API_URL = process.env.REACT_APP_API_URL
+
+    const fetchBooks = async ()=>{
+
+            const response = await axios.get(API_URL + "api/transactions/booksonhold");
+            setBooks(response.data);
+    }
+
+    useEffect(()=>{
+        fetchBooks();
+    },[])
+
     return (
         <div className='reservedbooks-container'>
             <h className='reservedbooks-title'>Books On Hold</h>
@@ -11,36 +27,17 @@ function ReservedBooks() {
                     <th>Book</th>
                     <th>Date</th>
                 </tr>
-                <tr>
-                    <td>Pranav</td>
-                    <td>Rich Dad Poor Dad</td>
-                    <td>12/7/2021</td>
+                {
+                books.map(( book , index )=>(
+                <tr key={index}>
+                    <td>{book.borrowerName}</td>
+                    <td>{book.bookName}</td>
+                    <td>{book.toDate}</td>
                 </tr>
-                <tr>
-                    <td>Sashank</td>
-                    <td>The Subtle Art</td>
-                    <td>10/7/2021</td>
-                </tr>
-                <tr>
-                    <td>Tanishq</td>
-                    <td>Wings Of Fire</td>
-                    <td>15/9/2021</td>
-                </tr>
-                <tr>
-                    <td>Akhil</td>
-                    <td>The Secret</td>
-                    <td>02/9/2021</td>
-                </tr>
-                <tr>
-                    <td>Surya</td>
-                    <td>Bad Guys</td>
-                    <td>21/7/2021</td>
-                </tr>
-                <tr>
-                    <td>Dinesh</td>
-                    <td>Giovanni Rovelli</td>
-                    <td>02/7/2021</td>
-                </tr>
+                ))
+                }
+                
+    
             </table>
         </div>
     )

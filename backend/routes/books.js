@@ -7,7 +7,27 @@ const router = express.Router()
 /* Get all books in the db */
 router.get("/allbooks", async (req, res) => {
     try {
-        const books = await Book.find({}).populate("transactions").sort({ _id: -1 })
+        const books = await Book.find({}).populate("transactions").populate("categories").sort({ _id: -1 })
+        res.status(200).json(books)
+    }
+    catch (err) {
+        return res.status(504).json(err);
+    }
+})
+/* Get popular books in the db */
+router.get("/popularbooks", async (req, res) => {
+    try {
+        const books = await Book.find({}).populate("transactions").populate("categories").sort({transactions : 1}).limit(5);
+        res.status(200).json(books)
+    }
+    catch (err) {
+        return res.status(504).json(err);
+    }
+})
+/* Get recent books books in the db */
+router.get("/recentupload", async (req, res) => {
+    try {
+        const books = await Book.find({}).populate("transactions").populate("categories").sort({ createdAt : -1  }).limit(5)
         res.status(200).json(books)
     }
     catch (err) {

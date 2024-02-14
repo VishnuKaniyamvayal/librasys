@@ -23,6 +23,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/books", bookRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/config", configRoutes);
 
 /* MongoDB connection */
 const connectDB = async () => {

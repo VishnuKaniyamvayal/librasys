@@ -4,13 +4,14 @@ import axios from "axios";
 
 function Allbooks() {
 
-  const [books , setBooks ] = useState();
+  const [books , setBooks ] = useState([]);
 
   const API_URL = process.env.REACT_APP_API_URL
 
   const getBooks = async () => {
     try {
         const response = await axios.get(API_URL + "api/books/allbooks")
+        console.log(response.data);
         setBooks(response.data);
     }
     catch (err) {
@@ -22,7 +23,7 @@ function Allbooks() {
 
     getBooks();
 
-  },[books])
+  },[])
 
   
 
@@ -39,7 +40,11 @@ function Allbooks() {
           <p className="bookcard-title">{book.alternateTitle}</p>
           <p className="bookcard-author">BY: {book.author}</p>
           <div className="bookcard-category">
-            <p>Auto Biography</p>
+            {
+              book.categories.map(( cat , index )=>(
+                <p key={index}>{cat.categoryName}</p>
+              ))
+            }
           </div>
           <div className="bookcard-emptybox"></div>
         </div>

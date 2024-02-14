@@ -15,6 +15,7 @@ router.post("/register", async (req, res) => {
     const newuser = await new User({
       userType: req.body.userType,
       userFullName: req.body.userFullName,
+      isAdmin:req.body.isAdmin,
       admissionId: req.body.admissionId,
       employeeId: req.body.employeeId,
       age: req.body.age,
@@ -22,6 +23,7 @@ router.post("/register", async (req, res) => {
       gender: req.body.gender,
       address: req.body.address,
       mobileNumber: req.body.mobileNumber,
+      photo: req.body.photo,
       email: req.body.email,
       password: hashedPass,
       isAdmin: req.body.isAdmin,

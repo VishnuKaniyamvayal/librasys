@@ -7,6 +7,9 @@ import userRoutes from "./routes/users.js";
 import bookRoutes from "./routes/books.js";
 import transactionRoutes from "./routes/transactions.js";
 import categoryRoutes from "./routes/categories.js";
+import configRoutes  from "./routes/config.js"
+import path from "path"
+import { dirname } from "path"; 
 
 /* App Config */
 dotenv.config();
@@ -40,6 +43,19 @@ connectDB();
 
 app.get("/", (req, res) => {
   res.status(200).send("Welcome to LibraryApp");
+});
+
+
+app.get('/uploads/:imageName', (req, res) => {
+  const imageName = req.params.imageName;
+  const __dirname = dirname("1");
+  const imagePath = path.join(__dirname, 'uploads', imageName);
+
+  res.sendFile(imagePath, {
+    headers: {
+      'Content-Type': 'image/jpeg', 
+    }
+  });
 });
 
 /* Port Listening In */

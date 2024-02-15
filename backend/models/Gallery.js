@@ -1,7 +1,11 @@
 import mongoose from "mongoose";
 
-const configSchema = new mongoose.Schema({
+const gallery = new mongoose.Schema({
     ImageUrl:{
+        type:String,
+        require:true
+    },
+    ImageName:{
         type:String,
         require:true
     },
@@ -13,4 +17,4 @@ const configSchema = new mongoose.Schema({
     timestamps:true
 })
 
-export default mongoose.model( "Config" , configSchema)
+export default mongoose.model( "gallery" , gallery)

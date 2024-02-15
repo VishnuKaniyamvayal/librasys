@@ -6,6 +6,7 @@ import AddBook from './Components/AddBook';
 
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import GalleryIcon from '@material-ui/icons/PhotoAlbum';
 import BookIcon from '@material-ui/icons/Book';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
@@ -16,6 +17,7 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import GetMember from './Components/GetMember';
 import AssignmentReturnIcon from '@material-ui/icons/AssignmentReturn';
 import Return from './Components/Return';
+import PhotoGallery from './Components/PhotoGallery';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import Profile from './Components/Profile';
 
@@ -59,6 +61,7 @@ function AdminDashboard() {
                     <p className={`dashboard-option ${active === "getmember" ? "clicked" : ""}`} onClick={() => { setActive("getmember"); setSidebar(false) }}><AccountBoxIcon className='dashboard-option-icon' /> Get Member </p>
                     <p className={`dashboard-option ${active === "addmember" ? "clicked" : ""}`} onClick={() => { setActive("addmember"); setSidebar(false) }}><PersonAddIcon className='dashboard-option-icon' /> Add Member </p>
                     <p className={`dashboard-option ${active === "returntransaction" ? "clicked" : ""}`} onClick={() => { setActive("returntransaction"); setSidebar(false) }}><AssignmentReturnIcon className='dashboard-option-icon' /> Return </p>
+                    <p className={`dashboard-option ${active === "photogallery" ? "clicked" : ""}`} onClick={() => { setActive("photogallery"); setSidebar(false) }}><GalleryIcon className='dashboard-option-icon' /> Photo Gallery </p>
                     <p className={`dashboard-option`} onClick={logout}><PowerSettingsNewIcon className='dashboard-option-icon' /> Log out </p>
 
                 </div>
@@ -81,6 +84,9 @@ function AdminDashboard() {
                     </div>
                     <div className="dashboard-addmember-content" style={active !== "returntransaction" ? { display: 'none' } : {}}>
                         <Return />
+                    </div>
+                    <div className="dashboard-addmember-content" style={active !== "photogallery" ? { display: 'none' } : {}}>
+                        <PhotoGallery />
                     </div>
                 </div>
             </div>

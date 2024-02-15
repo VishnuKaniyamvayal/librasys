@@ -20,6 +20,8 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 app.use(cors());
 
+app.use(express.static('uploads')); // Serve static files from the 'uploads' folder
+
 /* API Routes */
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -46,16 +48,10 @@ app.get("/", (req, res) => {
 });
 
 
-app.get('/uploads/:imageName', (req, res) => {
-  const imageName = req.params.imageName;
-  const __dirname = dirname("1");
-  const imagePath = path.join(__dirname, 'uploads', imageName);
-
-  res.sendFile(imagePath, {
-    headers: {
-      'Content-Type': 'image/jpeg', 
-    }
-  });
+app.get('/uploads/:filename', (req, res) => {
+  const { filename } = req.params;
+  const filePath = `uploads/${filename}`;
+  res.sendFile(filePath, { root: '.' });
 });
 
 /* Port Listening In */

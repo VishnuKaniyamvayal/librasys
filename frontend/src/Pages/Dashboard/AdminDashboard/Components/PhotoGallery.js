@@ -11,17 +11,49 @@ function PhotoGallery() {
     const API_URL = process.env.REACT_APP_API_URL
     const [isLoading, setIsLoading] = useState(false)
 
-    const [userFullName, setUserFullName] = useState(null)
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [previewImage, setPreviewImage] = useState(null);
+
+    const handleImageChange = (event) => {
+        const imageFile = event.target.files[0];
+        setSelectedImage(imageFile);
+        setPreviewImage(URL.createObjectURL(imageFile));
+      };
+
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+    
+        const formData = new FormData();
+        formData.append('image', selectedImage);
+    
+        try {
+            const response = await axios.post(API_URL+'api/config/addimagetogallery', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            });
+    
+            if (response.status === 201) { // Check for successful upload status code
+                alert('Image uploaded successfully!');
+                setSelectedImage(null);
+                setPreviewImage(null);
+              } else {
+                throw new Error(`Error uploading image: ${response.statusText}`);
+              }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred while uploading the image.');
+          }
+      }
 
     return (
         <div>
             <p className="dashboard-option-title">Add photos</p>
-            <form className="addmember-form" onSubmit={addMember}>
-                <label className="addmember-form-label" htmlFor="userFullName">Full Name<span className="required-field">*</span></label><br />
-                <input className="addmember-form-input" type="text" name="userFullName" value={userFullName} required onChange={(e) => setUserFullName(e.target.value)}></input><br />
+            <form className="addmember-form" onSubmit={handleSubmit}>
+                <label className="addmember-form-label" htmlFor="userFullName">Select Image<span className="required-field">*</span></label><br />
+                <input className="addmember-form-input" type="file" name="image" required onChange={handleImageChange}></input><br />
+                <button className='addbook-submit' type="submit">Upload Image</button>
             </form>
-            <p className="dashboard-option-title">Add a Member</p>
-            <div className="dashboard-title-line"></div>
         </div>
     )
 }

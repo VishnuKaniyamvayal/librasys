@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
     // Generate a unique filename with current date-time
     const date = new Date().toISOString().replace(/\W/g, '_');
-    const filename = `${date}-${file.originalname}`;
+    const filename = `${date}.jpg`;
     cb(null, filename); // Use the original filename
   }
 });

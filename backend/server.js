@@ -8,8 +8,6 @@ import bookRoutes from "./routes/books.js";
 import transactionRoutes from "./routes/transactions.js";
 import categoryRoutes from "./routes/categories.js";
 import configRoutes  from "./routes/config.js"
-import path from "path"
-import { dirname } from "path"; 
 
 /* App Config */
 dotenv.config();

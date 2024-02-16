@@ -53,4 +53,14 @@ router.get("/getgallery",async(req,res)=>{
   }
 })
 
+router.get("/footerdetails",async(req,res)=>{
+  try{
+    const response = await User.find({}).sort({ createdAt: 1 }).limit(1);
+    res.status(200).send(response)
+  }
+  catch(err) {
+    res.status(504).json(err)
+  }
+})
+
 export default router
